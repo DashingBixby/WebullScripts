@@ -1,1 +1,56 @@
+// Saty ATR Inspired for WBv1.1 (Manual Input Version)
+// Created 9/2025 by DashingBixby
+// This version uses user-defined inputs for the previous day's
+// close AND ATR to plot the levels on any timeframe.
+// v1.1 - Add remaining fib extension & retrace zones.
 
+// --- User Inputs ---
+// At the start of the day, enter the prior day's closing price and ATR value.
+prev_close = define(999999.99, "Prev Close")
+prev_atr = define(9999.99, "Prev Day ATR")
+trigger_percentage = define(0.236, "Trigger Pct")
+fib382 = define(0.382, "Fib 382")
+fib500 = define(0.5, "Fib 500")
+fib618 = define(0.618, "Fib 618")
+fib786 = define(0.786, "Fib 786")
+fib_full = define (1, "Full Range")
+atrValue = ind.atr(14)
+//closeValue = close
+
+// --- Calculations ---
+// Lower Calcs
+lower_trigger = prev_close - trigger_percentage * prev_atr
+lower382 = prev_close - fib382 * prev_atr
+lower500 = prev_close - fib500 * prev_atr
+lower618 = prev_close - fib618 * prev_atr
+lower786 = prev_close - fib786 * prev_atr
+lowerFull = prev_close - fib_full * prev_atr
+
+// Upper Calcs
+upper_trigger = prev_close + trigger_percentage * prev_atr
+upper382 = prev_close + fib382 * prev_atr
+upper500 = prev_close + fib500 * prev_atr
+upper618 = prev_close + fib618 * prev_atr
+upper786 = prev_close + fib786 * prev_atr
+upperFull = prev_close + fib_full * prev_atr
+
+
+// --- Plotting ---
+plt(prev_close, name="Prev Close", color=color.white, line_width=3)
+plt(atrValue, name="ATR Value", color=color.white)
+
+// Lower Plots
+plt(lower_trigger, name="Lower Trigger", color=color.yellow, line_width=1)
+plt(lower382, name="Lower 382", color=color.yellow, line_width=1)
+plt(lower500, name="Lower 500", color=color.yellow, line_width=1)
+plt(lower618, name="Lower 618", color=color.yellow, line_width=1)
+plt(lower786, name="Lower 786", color=color.yellow, line_width=1)
+plt(lowerFull, name="Lower Full", color=color.yellow, line_width=1)
+
+// Upper Plots
+plt(upper_trigger, name="Upper Trigger", color=color.blue, line_width=1)
+plt(upper382, name="Upper 382", color=color.blue, line_width=1)
+plt(upper500, name="Upper 500", color=color.blue, line_width=1)
+plt(upper618, name="Upper 618", color=color.blue, line_width=1)
+plt(upper786, name="Upper 786", color=color.blue, line_width=1)
+plt(upperFull, name="Upper Full", color=color.blue, line_width=1)
